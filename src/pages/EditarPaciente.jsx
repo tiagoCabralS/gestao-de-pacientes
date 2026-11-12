@@ -6,8 +6,10 @@ import Botao from "../components/Botao";
 import Conteudo from "../components/Conteudo";
 import PacienteForm from "../components/forms/PacienteForm";
 import Title from "../components/Title";
+import { validarUsuario } from "../context/Validacao";
 
 function EditarPaciente() {
+  validarUsuario()
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const id = searchParams.get("id");
