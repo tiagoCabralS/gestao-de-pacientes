@@ -65,8 +65,8 @@ let usuariosCadastrados = [
 
 // Array de Pacientes cadastrados
 let pacientesCadastrados = [
-    new Paciente(1, "Tiago Santos Cabral da Silva", "2007-08-13", "Homem", "67676767676", "13676767676", "tiagocabral.gja@gmail.com", new Endereco("11111111", "Rua Das Águas", "69", "Joinvile", "Pindamonhangaba", "Acre"), "M", "O+", [], [], 80.5, 2.67),
-    new Paciente(2, "Yuri", "2007-08-13", "Homem", "67676767676", "13676767676", "yuri@email.com", new Endereco("11111111", "Rua Das Águas", "69", "Joinvile", "Pindamonhangaba", "Acre"), "F", "O+", [], [], 80.5, 2.67)
+    new Paciente(1, "Tiago Santos Cabral da Silva", "2007-08-13", "Homem", "67676767676", "13676767676", "tiagocabral.gja@gmail.com", new Endereco("11111111", "Rua Das Águas", "69", "Joinvile", "Pindamonhangaba", "Acre"), "M", "O+", [], [], 80.5, 267),
+    new Paciente(2, "Yuri", "2007-08-13", "Homem", "67676767676", "13676767676", "yuri@email.com", new Endereco("11111111", "Rua Das Águas", "69", "Joinvile", "Pindamonhangaba", "Acre"), "F", "O+", [], [], 80.5, 267)
 ]
 
 const PORT = 3000
