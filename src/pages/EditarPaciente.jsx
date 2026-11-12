@@ -99,6 +99,11 @@ function EditarPaciente() {
 
   return (
     <Background className="h-fit">
+      <div className="fixed bg-olive-300 p-4 rounded-md left-0 top-0 m-2 flex flex-col gap-2">
+        <Botao type="button" onClick={() => navigate("/pacientes")}>
+          Página Inicial
+        </Botao>
+      </div>
       <Conteudo>
         <Title>Editar Paciente</Title>
         <PacienteForm
