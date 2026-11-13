@@ -13,7 +13,7 @@ class Endereco{
     }
 }
 
-class Paciente{
+export class Paciente{
     constructor(
         id, 
         nome, 
@@ -30,6 +30,19 @@ class Paciente{
         peso,
         altura
     ){
+        if (!nome || nome.length < 3){
+            throw new Error("O nome deve conter pelo menos 3 caracteres.")
+        }
+        if (!cpf || cpf.length < 11 || cpf.length > 11){
+            throw new Error("O CPF deve conter 11 caracteres numéricos.")
+        }
+        try {
+            Number(telefone)
+        }
+        catch(error){
+            throw new Error(error)
+        }
+
         this.id = id
         this.nome = nome
         this.data_nascimento = data_nascimento
