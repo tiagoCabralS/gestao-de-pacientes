@@ -41,6 +41,9 @@ export class Paciente{
         if (!sexo){
             throw new Error("Sexo é um atributo obrigatório.")
         }
+        if (!typeof endereco == Endereco){
+            throw new Error("Tipo inválido para endereço")
+        }
         
         this.id = id
         this.nome = nome
