@@ -32,17 +32,8 @@ export class Paciente{
         if (!cpf || cpf.length < 11 || cpf.length > 11){
             throw new Error("O CPF deve conter 11 caracteres numéricos.")
         }
-        try {
-            Number(telefone)
-        }
-        catch(error){
-            throw new Error(error)
-        }
         if (!sexo){
             throw new Error("Sexo é um atributo obrigatório.")
-        }
-        if (!typeof endereco == Endereco){
-            throw new Error("Tipo inválido para endereço")
         }
         
         this.id = id
