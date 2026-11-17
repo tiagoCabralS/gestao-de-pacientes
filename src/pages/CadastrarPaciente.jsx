@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Background from "../components/Background";
@@ -6,27 +5,27 @@ import Botao from "../components/Botao";
 import Conteudo from "../components/Conteudo";
 import PacienteForm from "../components/forms/PacienteForm";
 import Title from "../components/Title";
-import { validarUsuario } from "../context/Validacao";
 
 function CadastrarPaciente() {
   const navigate = useNavigate();
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState("");
 
   async function handleCadastro(values) {
-    setIsSubmitting(true);
-    setError("");
-
     try {
+      const token = JSON.parse(localStorage.getItem("token"));
+
       const response = await axios.post(
         "http://localhost:3000/paciente/create",
         values,
+        {
+          headers: {
+            Authorization : `Bearer ${token}`
+          }
+        }
       );
       navigate(`/pacientes/detalhes/?id=${response.data.id}/`);
-    } catch {
-      setError("Não foi possível cadastrar o paciente. Tente novamente.");
-    } finally {
-      setIsSubmitting(false);
+    } catch (err) {
+      console.log(err)
+      navigate("/login/")    
     }
   }
 
@@ -41,8 +40,6 @@ function CadastrarPaciente() {
         <Title>Novo Paciente</Title>
         <PacienteForm
           onSubmit={handleCadastro}
-          isSubmitting={isSubmitting}
-          error={error}
           showResetButton
         />
       </Conteudo>
