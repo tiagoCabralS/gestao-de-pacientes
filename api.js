@@ -75,9 +75,10 @@ const UserValidacao = (req, res, next) => {
 
     if (!token) return res.status(401).json({error: "Não autorizado"})
 
-    jwt.verify(token, ACCES_TOKEN_KEY, (err, username) => {
+    jwt.verify(token, ACCES_TOKEN_KEY, (err) => {
         if (err) return res.status(401).json({error: "Não autorizado"})
-
+        
+        console.log("LOGGED")
         next()
     })
 }
@@ -160,7 +161,7 @@ app.post("/paciente/:id/edit", UserValidacao, (req, res) => {
 })
 
 // DELETE Paciente (Caso exista)
-app.post("/paciente/:id/delete", UserValidacao, (req, res) =>{
+app.delete("/paciente/:id/delete", UserValidacao, (req, res) =>{
     let indice = null
     let usuarioEncontrado = false
     const { id } = req.params
