@@ -10,7 +10,6 @@ import { validarUsuario } from "../context/Validacao";
 import Botao from "../components/Botao";
 
 function PacientesCadastrados() {
-  validarUsuario()
   const navigate = useNavigate()
   const [pacientesCadastrados, setPacientesCadastrados] = useState([]);
 

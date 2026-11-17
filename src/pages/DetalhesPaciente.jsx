@@ -12,7 +12,6 @@ import ConfirmModal from "../components/ConfirmModal";
 import normalizarLista from "../utils/normalizarLista";
 
 function DetalhesPaciente() {
-  validarUsuario();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const id = searchParams.get("id");

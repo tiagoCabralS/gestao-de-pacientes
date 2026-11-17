@@ -9,8 +9,6 @@ import Title from "../components/Title";
 import { validarUsuario } from "../context/Validacao";
 
 function CadastrarPaciente() {
-  validarUsuario();
-
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
