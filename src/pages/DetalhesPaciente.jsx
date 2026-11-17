@@ -8,7 +8,6 @@ import { useEffect, useState } from "react";
 import Botao from "../components/Botao";
 import Title from "../components/Title";
 import ConfirmModal from "../components/ConfirmModal";
-import normalizarLista from "../utils/normalizarLista";
 
 function DetalhesPaciente() {
   const navigate = useNavigate();
@@ -46,9 +45,6 @@ function DetalhesPaciente() {
       </div>
     );
   }
-
-  const alergias = normalizarLista(paciente.alergias);
-  const comorbidades = normalizarLista(paciente.comorbidades);
 
   function handleDeletarPaciente(id) {
     const token = JSON.parse(localStorage.getItem("token"));
@@ -125,9 +121,9 @@ function DetalhesPaciente() {
             <tr>
               <TdLabel>Alergias</TdLabel>
               <td colSpan={2}>
-                {alergias.length > 0 ? (
+                {paciente.alergias.length > 0 ? (
                   <ul className="list-none space-y-1">
-                    {alergias.map((alergia) => (
+                    {paciente.alergias.map((alergia) => (
                       <li key={alergia}>{alergia}</li>
                     ))}
                   </ul>
@@ -137,9 +133,9 @@ function DetalhesPaciente() {
               </td>
               <TdLabel>Comorbidades</TdLabel>
               <td colSpan={2}>
-                {comorbidades.length > 0 ? (
+                {paciente.comorbidades.length > 0 ? (
                   <ul className="list-none space-y-1">
-                    {comorbidades.map((comorbidade) => (
+                    {paciente.comorbidades.map((comorbidade) => (
                       <li key={comorbidade}>{comorbidade}</li>
                     ))}
                   </ul>
