@@ -6,7 +6,6 @@ import Botao from "../components/Botao";
 import Conteudo from "../components/Conteudo";
 import PacienteForm from "../components/forms/PacienteForm";
 import Title from "../components/Title";
-import { validarUsuario } from "../context/Validacao";
 
 function EditarPaciente() {
   const navigate = useNavigate();
@@ -21,10 +20,21 @@ function EditarPaciente() {
     let active = true;
 
     async function carregarPaciente() {
+      const token = JSON.parse(localStorage.getItem("token"));
+
       try {
         const response = await axios.get(
           `http://localhost:3000/paciente/${id}`,
-        );
+          {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          }
+        )
+        .catch((err) => {
+          console.log(err)
+          navigate("/login/")
+        });
         if (active) {
           const dadosPaciente = response.data;
           setPaciente({
@@ -61,7 +71,13 @@ function EditarPaciente() {
     setError("");
 
     try {
-      await axios.post(`http://localhost:3000/paciente/${id}/edit`, values);
+      const token = JSON.parse(localStorage.getItem("token"));
+
+      await axios.post(`http://localhost:3000/paciente/${id}/edit`, values, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
       navigate(`/pacientes/detalhes/?id=${id}/`);
     } catch {
       setError("Não foi possível atualizar o paciente. Tente novamente.");
