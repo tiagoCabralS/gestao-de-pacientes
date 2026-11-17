@@ -6,7 +6,6 @@ import Li from "../components/Li";
 import PacientesBotao from "../components/PacientesBotao";
 import { useNavigate } from "react-router-dom";
 import Title from "../components/Title";
-import { validarUsuario } from "../context/Validacao";
 import Botao from "../components/Botao";
 
 function PacientesCadastrados() {
@@ -24,7 +23,18 @@ function PacientesCadastrados() {
   }
 
   useEffect(() => {
-    axios.get("http://localhost:3000/paciente/all").then(({ data }) => {
+    const token = JSON.parse(localStorage.getItem("token"));
+
+    axios.get("http://localhost:3000/paciente/all", {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    .catch((err) => {
+      console.log(err)
+      navigate("/login/")
+    })
+    .then(({ data }) => {
       setPacientesCadastrados(data);
     });
   }, []);
