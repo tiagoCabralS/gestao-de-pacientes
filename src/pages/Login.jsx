@@ -25,7 +25,7 @@ function Login() {
       });
 
       localStorage.setItem("token", JSON.stringify(response.data.token))
-      navigate("/")
+      navigate("/pacientes")
     } catch (error) {
       console.log(error);
       alert("Acesso não autorizado! Username ou senha incorretos.")

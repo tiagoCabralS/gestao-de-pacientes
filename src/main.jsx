@@ -11,10 +11,6 @@ import EditarPaciente from './pages/EditarPaciente.jsx'
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <App/>
-  },
-  {
     path: "/login",
     element: <Login/>
   },
