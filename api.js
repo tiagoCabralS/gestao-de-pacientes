@@ -68,13 +68,27 @@ app.get("/usuario/validacao", (req, res) => {
     })
 })
 
+const UserValidacao = (req, res, next) => {
+    const authHeader = req.headers["authorization"]
+
+    const token = authHeader && authHeader.split(" ")[1]
+
+    if (!token) return res.status(401).json({error: "Não autorizado"})
+
+    jwt.verify(token, ACCES_TOKEN_KEY, (err, username) => {
+        if (err) return res.status(401).json({error: "Não autorizado"})
+
+        next()
+    })
+}
+
 // GET todos os pacientes cadastrados
-app.get("/paciente/all", (req, res) => {
+app.get("/paciente/all", UserValidacao, (req, res) => {
     return res.json(pacientesCadastrados)
 })
 
 // GET Paciente
-app.get("/paciente/:id", (req, res) => {
+app.get("/paciente/:id", UserValidacao, (req, res) => {
     let id = Number(req.params.id)
     let pacienteEncontrado = pacientesCadastrados.find(
         paciente => paciente && paciente.id === id
@@ -88,7 +102,7 @@ app.get("/paciente/:id", (req, res) => {
 })
 
 // POST novo Paciente
-app.post("/paciente/create", (req, res) => { 
+app.post("/paciente/create", UserValidacao, (req, res) => { 
     let id = null
     let ultimo_id = null
     try {
@@ -117,7 +131,7 @@ app.post("/paciente/create", (req, res) => {
 })
 
 // UPDATE Paciente (Caso exista)
-app.post("/paciente/:id/edit", (req, res) => {
+app.post("/paciente/:id/edit", UserValidacao, (req, res) => {
     const { id } = req.params
     const { 
         nome, data_nascimento, genero, cpf, telefone, email, cep, rua, numero, bairro, cidade, estado, sexo, tipoSanguineo, alergias, comorbidades, peso, altura
@@ -146,7 +160,7 @@ app.post("/paciente/:id/edit", (req, res) => {
 })
 
 // DELETE Paciente (Caso exista)
-app.post("/paciente/:id/delete", (req, res) =>{
+app.post("/paciente/:id/delete", UserValidacao, (req, res) =>{
     let indice = null
     let usuarioEncontrado = false
     const { id } = req.params
