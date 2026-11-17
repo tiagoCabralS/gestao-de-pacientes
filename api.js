@@ -2,7 +2,7 @@ import express from "express"
 import cors from "cors";
 import jwt from "jsonwebtoken";
 
-import { Paciente, Endereco, Usuario } from "./classes";
+import { Paciente, Endereco, Usuario } from "./classes.js";
 
 // Array de usuarios que podem fazer LOGIN
 let usuariosCadastrados = [
