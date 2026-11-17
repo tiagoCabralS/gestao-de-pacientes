@@ -63,8 +63,6 @@ function PacienteForm({
   onSubmit,
   submitLabel = "Cadastrar",
   method = "POST",
-  isSubmitting = false,
-  error = "",
   showResetButton = false,
 }) {
   const [values, setValues] = useState(() =>
@@ -327,16 +325,14 @@ function PacienteForm({
         />
       </div>
 
-      {error && <p role="alert" className="text-red-700">{error}</p>}
-
       <div className="flex gap-2">
         {showResetButton && (
           <Botao type="reset" className="w-full">
             Limpar Formulário
           </Botao>
         )}
-        <Botao type="submit" className="w-full" disabled={isSubmitting}>
-          {isSubmitting ? "Salvando..." : submitLabel}
+        <Botao type="submit" className="w-full">
+          {submitLabel}
         </Botao>
       </div>
     </Formulario>
