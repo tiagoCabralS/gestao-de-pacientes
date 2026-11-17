@@ -7,7 +7,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Botao from "../components/Botao";
 import Title from "../components/Title";
-import { validarUsuario } from "../context/Validacao";
 import ConfirmModal from "../components/ConfirmModal";
 import normalizarLista from "../utils/normalizarLista";
 
@@ -20,8 +19,18 @@ function DetalhesPaciente() {
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 
   useEffect(() => {
+    const token = JSON.parse(localStorage.getItem("token"));
+
     axios
-      .get(`http://localhost:3000/paciente/${id}`)
+      .get(`http://localhost:3000/paciente/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+        navigate("/login/")
+      })
       .then((data) => {
         setPaciente(data.data);
       })
@@ -42,7 +51,16 @@ function DetalhesPaciente() {
   const comorbidades = normalizarLista(paciente.comorbidades);
 
   function handleDeletarPaciente(id) {
-    axios.post(`http://localhost:3000/paciente/${id}/delete`);
+    const token = JSON.parse(localStorage.getItem("token"));
+
+    axios.delete(`http://localhost:3000/paciente/${id}/delete`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    .catch((err) => {
+      console.log(err)
+    })
     console.log(`Paciente ${id} apagado com sucesso!`);
     navigate(-1);
   }
