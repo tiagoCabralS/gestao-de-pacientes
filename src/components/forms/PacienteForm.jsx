@@ -53,8 +53,8 @@ function criarValoresFormulario(initialValues = {}) {
       initialValues.tipoSanguineo ?? valoresIniciais.tipoSanguineo,
     peso: initialValues.peso ?? "",
     altura: initialValues.altura ?? "",
-    alergias: normalizarLista(initialValues.alergias),
-    comorbidades: normalizarLista(initialValues.comorbidades),
+    alergias: initialValues.alergias,
+    comorbidades: initialValues.comorbidades,
   };
 }
 
