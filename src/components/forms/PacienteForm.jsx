@@ -9,7 +9,6 @@ import {
   opcoesComorbidades,
   ufs,
 } from "../../data/opcoesPaciente";
-import normalizarLista from "../../utils/normalizarLista";
 
 const valoresIniciais = {
   nome: "",
