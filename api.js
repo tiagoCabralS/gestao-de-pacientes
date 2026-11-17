@@ -54,20 +54,6 @@ app.post("/usuario/login", (req, res) => {
 })
 
 // VALIDAÇÃO do Usuario
-app.get("/usuario/validacao", (req, res) => {
-    const authHeader = req.headers["authorization"]
-
-    const token = authHeader && authHeader.split(" ")[1]
-
-    if (!token) return res.status(403).json({error: "Não autorizado"}) 
-
-    jwt.verify(token, ACCES_TOKEN_KEY, (err, username) => {
-        if (err) return res.status(403).json({error: "Não autorizado"})
-        
-        return res.json({message: "Acesso autorizado!", username})
-    })
-})
-
 const UserValidacao = (req, res, next) => {
     const authHeader = req.headers["authorization"]
 
