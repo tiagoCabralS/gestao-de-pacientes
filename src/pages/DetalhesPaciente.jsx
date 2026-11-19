@@ -58,7 +58,7 @@ function DetalhesPaciente() {
       console.log(err)
     })
     console.log(`Paciente ${id} apagado com sucesso!`);
-    navigate(-1);
+    navigate('/pacientes');
   }
 
   function handleEditClick(id){
