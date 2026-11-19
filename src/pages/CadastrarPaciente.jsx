@@ -18,14 +18,13 @@ function CadastrarPaciente() {
         values,
         {
           headers: {
-            Authorization : `Bearer ${token}`
-          }
-        }
+            Authorization: `Bearer ${token}`,
+          },
+        },
       );
-      navigate(`/pacientes/detalhes/?id=${response.data.id}/`);
+      navigate(`/pacientes/detalhes/?id=${response.data.id}`);
     } catch (err) {
-      console.log(err)
-      navigate("/login/")    
+      console.log(err.code);
     }
   }
 
@@ -38,10 +37,7 @@ function CadastrarPaciente() {
       </div>
       <Conteudo>
         <Title>Novo Paciente</Title>
-        <PacienteForm
-          onSubmit={handleCadastro}
-          showResetButton
-        />
+        <PacienteForm onSubmit={handleCadastro} showResetButton />
       </Conteudo>
     </Background>
   );
