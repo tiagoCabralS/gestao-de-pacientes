@@ -1,5 +1,3 @@
-import { validarUsuario } from "./context/Validacao";
-
 function App() {
   validarUsuario()
 
