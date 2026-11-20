@@ -29,6 +29,10 @@ function sexoValidator(sexo){
     return sexo === "M" || sexo === "F"
 }
 
+function generoValidator(genero){
+    return genero === "Homem" || genero === "Mulher" || genero === "Não-binário"
+}
+
 export const dataValidacao = (req, res, next) => {
     if (!cpfValidator(req.body.cpf)) {
         return res.status(422).json({"erro": "CPF inválido"})
@@ -41,6 +45,9 @@ export const dataValidacao = (req, res, next) => {
     }
     if (!sexoValidator(req.body.sexo)) {
         return res.status(422).json({"erro": "Sexo inválido"})
+    }
+    if (!generoValidator(req.body.genero)) {
+        return res.status(422).json({"erro": "Gênero inválido"})
     }
 
     next()
