@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Background from "../components/Background";
@@ -8,8 +9,11 @@ import Title from "../components/Title";
 
 function CadastrarPaciente() {
   const navigate = useNavigate();
+  const [error, setError] = useState("");
 
   async function handleCadastro(values) {
+    setError("");
+
     try {
       const token = JSON.parse(localStorage.getItem("token"));
 
@@ -24,7 +28,20 @@ function CadastrarPaciente() {
       );
       navigate(`/pacientes/detalhes/?id=${response.data.id}`);
     } catch (err) {
-      console.log(err.code);
+      const dadosErro = err.response?.data;
+      setError(
+        dadosErro?.errors ||
+          dadosErro?.message ||
+          dadosErro?.messages ||
+          dadosErro?.error ||
+          dadosErro?.detail ||
+          dadosErro?.msg ||
+          dadosErro?.mensagem ||
+          dadosErro?.erro ||
+          dadosErro ||
+          err.message ||
+          "Não foi possível cadastrar o paciente. Tente novamente.",
+      );
     }
   }
 
@@ -37,7 +54,11 @@ function CadastrarPaciente() {
       </div>
       <Conteudo>
         <Title>Novo Paciente</Title>
-        <PacienteForm onSubmit={handleCadastro} showResetButton />
+        <PacienteForm
+          onSubmit={handleCadastro}
+          showResetButton
+          error={error}
+        />
       </Conteudo>
     </Background>
   );

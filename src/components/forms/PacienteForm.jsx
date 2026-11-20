@@ -57,16 +57,35 @@ function criarValoresFormulario(initialValues = {}) {
   };
 }
 
+function obterMensagensErro(error) {
+  if (typeof error === "string") {
+    return [error];
+  }
+
+  if (Array.isArray(error)) {
+    return error.flatMap(obterMensagensErro);
+  }
+
+  if (error && typeof error === "object") {
+    return Object.values(error).flatMap(obterMensagensErro);
+  }
+
+  return [];
+}
+
 function PacienteForm({
   initialValues = valoresIniciais,
   onSubmit,
   submitLabel = "Cadastrar",
   method = "POST",
   showResetButton = false,
+  error = "",
 }) {
   const [values, setValues] = useState(() =>
     criarValoresFormulario(initialValues),
   );
+  const [hasSubmitted, setHasSubmitted] = useState(false);
+  const mensagensErro = obterMensagensErro(error);
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -86,6 +105,7 @@ function PacienteForm({
 
   function handleSubmit(e) {
     e.preventDefault();
+    setHasSubmitted(true);
     onSubmit(values);
   }
 
@@ -323,6 +343,17 @@ function PacienteForm({
           required
         />
       </div>
+
+      {hasSubmitted && mensagensErro.length > 0 && (
+        <div
+          role="alert"
+          className="w-full rounded-md bg-red-100 p-3 text-red-700"
+        >
+          {mensagensErro.map((mensagem, index) => (
+            <p key={`${index}-${mensagem}`}>{mensagem}</p>
+          ))}
+        </div>
+      )}
 
       <div className="flex gap-2">
         {showResetButton && (

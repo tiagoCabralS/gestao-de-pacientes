@@ -79,8 +79,21 @@ function EditarPaciente() {
         }
       });
       navigate(`/pacientes/detalhes/?id=${id}/`);
-    } catch {
-      setError("Não foi possível atualizar o paciente. Tente novamente.");
+    } catch (err) {
+      const dadosErro = err.response?.data;
+      setError(
+        dadosErro?.errors ||
+          dadosErro?.message ||
+          dadosErro?.messages ||
+          dadosErro?.error ||
+          dadosErro?.detail ||
+          dadosErro?.msg ||
+          dadosErro?.mensagem ||
+          dadosErro?.erro ||
+          dadosErro ||
+          err.message ||
+          "Não foi possível atualizar o paciente. Tente novamente.",
+      );
     } finally {
       setIsSubmitting(false);
     }
