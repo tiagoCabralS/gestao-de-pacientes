@@ -1,3 +1,11 @@
+export function nomeValidator(nome){
+    if (!nome || nome.length < 3){
+        return false
+    }
+
+    return true
+}
+
 export function cpfValidator(cpf) {
     if (cpf.length < 11 || cpf.length > 11){
         return false
@@ -23,6 +31,9 @@ export const dataValidacao = (req, res, next) => {
     }
     if (!telefoneValidator(req.body.telefone)) {
         return res.status(422).json({"erro": "Telefone inválido"})
+    }
+    if (!nomeValidator(req.body.nome)) {
+        return res.status(422).json({"erro": "Nome inválido"})
     }
 
     next()
