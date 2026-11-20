@@ -1,4 +1,4 @@
-export function nomeValidator(nome){
+function nomeValidator(nome){
     if (!nome || nome.length < 3){
         return false
     }
@@ -6,7 +6,7 @@ export function nomeValidator(nome){
     return true
 }
 
-export function cpfValidator(cpf) {
+function cpfValidator(cpf) {
     if (cpf.length < 11 || cpf.length > 11){
         return false
     }
@@ -17,12 +17,16 @@ export function cpfValidator(cpf) {
     return true
 }
 
-export function telefoneValidator(telefone){
+function telefoneValidator(telefone){
   const apenasNumeros = String(telefone).replace(/\D/g, '');
 
   const tamanhoValido = apenasNumeros.length === 10 || apenasNumeros.length === 11;
 
   return tamanhoValido;
+}
+
+function sexoValidator(sexo){
+    return sexo === "M" || sexo === "F"
 }
 
 export const dataValidacao = (req, res, next) => {
@@ -34,6 +38,9 @@ export const dataValidacao = (req, res, next) => {
     }
     if (!nomeValidator(req.body.nome)) {
         return res.status(422).json({"erro": "Nome inválido"})
+    }
+    if (!sexoValidator(req.body.sexo)) {
+        return res.status(422).json({"erro": "Sexo inválido"})
     }
 
     next()
