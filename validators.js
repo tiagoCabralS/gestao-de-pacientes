@@ -9,4 +9,14 @@ function cpfValidator(cpf) {
     return true
 }
 
-console.log(cpfValidator('1111111111a'))
+function telefoneValidator(telefone){
+  const apenasNumeros = String(telefone).replace(/\D/g, '');
+
+  const tamanhoValido = apenasNumeros.length === 10 || apenasNumeros.length === 11;
+
+  return tamanhoValido;
+}
+
+
+console.log(telefoneValidator('11111111111'))
+
