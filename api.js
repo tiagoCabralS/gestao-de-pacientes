@@ -3,6 +3,7 @@ import cors from "cors";
 import jwt from "jsonwebtoken";
 
 import { Paciente, Endereco, Usuario } from "./classes.js";
+import { dataValidacao } from "./validators.js"
 
 // Array de usuarios que podem fazer LOGIN
 let usuariosCadastrados = [
@@ -89,7 +90,7 @@ app.get("/paciente/:id", UserValidacao, (req, res) => {
 })
 
 // POST novo Paciente
-app.post("/paciente/create", UserValidacao, (req, res) => { 
+app.post("/paciente/create", UserValidacao, dataValidacao, (req, res) => { 
     let id = null
     let ultimo_id = null
     try {
@@ -118,7 +119,7 @@ app.post("/paciente/create", UserValidacao, (req, res) => {
 })
 
 // UPDATE Paciente (Caso exista)
-app.post("/paciente/:id/edit", UserValidacao, (req, res) => {
+app.post("/paciente/:id/edit", UserValidacao, dataValidacao, (req, res) => {
     const { id } = req.params
     const { 
         nome, data_nascimento, genero, cpf, telefone, email, cep, rua, numero, bairro, cidade, estado, sexo, tipoSanguineo, alergias, comorbidades, peso, altura
