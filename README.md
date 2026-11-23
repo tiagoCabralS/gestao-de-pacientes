@@ -4,6 +4,7 @@ Aplicação web para cadastro de pacientes de uma clínica (CRUD com login).
 Trabalho de Desenvolvimento Web Avançado (IFSP).
 
 **Integrantes:** Tiago Cabral, Yuri Corrêa, Yuri Gabriel
+
 **Tecnologia do frontend:** React
 
 ## Estrutura
